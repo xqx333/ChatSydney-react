@@ -203,8 +203,7 @@ if __name__ == '__main__':
         print("Loaded cookies.json")
     else:
         _U = os.environ.get("_U")
-        loaded_cookies = []
-        loaded_cookies = list(filter(lambda d: d.get('name') != '_U', cookies)) + [{"name": "_U", "value": _U}]
+        loaded_cookies = [{"name": "_U", "value": _U}]
         print("cookies.json not found")
 
     claude_chatbot = claude.Chatbot(proxy=args.proxy)
