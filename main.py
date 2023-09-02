@@ -202,13 +202,16 @@ if __name__ == '__main__':
             loaded_cookies = json.load(f)
         print("Loaded cookies.json")
     else:
+        _U = os.environ.get("_U")
         loaded_cookies = []
+        loaded_cookies = list(filter(lambda d: d.get('name') != '_U', cookies)) + [{"name": "_U", "value": _U}]
         print("cookies.json not found")
 
     claude_chatbot = claude.Chatbot(proxy=args.proxy)
 
     loop = asyncio.get_event_loop()
     try:
+    
         loop.run_until_complete(main(host, port))
         loop.run_forever()
     except KeyboardInterrupt:
